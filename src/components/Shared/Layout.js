@@ -1,13 +1,14 @@
 import React from 'react'
 import SideBar from './SideBar'
+import { Row } from 'react-bootstrap'
 
 const Layout = ({ user, alert }) => (
-  <div>
+  <Row>
     <SideBar
       user={user}
       alert={alert}
     />
-  </div>
+  </Row>
 )
 
 export default Layout

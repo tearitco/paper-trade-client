@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
+import { ListGroup, Col, Row } from 'react-bootstrap'
 
 const Positions = ({ user, alerts }) => {
   const [positions, setPositions] = useState([])
@@ -18,15 +19,40 @@ const Positions = ({ user, alerts }) => {
   }, [])
 
   const positionsJsx = positions.map(position => (
-    <div key={position.id}>
-      <li>{position.name}</li>
-    </div>
+    <ListGroup.Item as="li" key={position.id}>
+      <Row>
+        <Col sm={12} md={3}>
+          <Row>
+            <p>Company:</p>
+            {position.name}
+          </Row>
+        </Col>
+        <Col sm={12} md={3}>
+          <Row>
+            <p>Ticker:</p>
+            {position.ticker}
+          </Row>
+        </Col>
+        <Col sm={12} md={3}>
+          <Row>
+            <p>Position size:</p>
+            {position.volume}
+          </Row>
+        </Col>
+        <Col sm={12} md={3}>
+          <Row>
+            <p>Share price:</p>
+            {position.price}
+          </Row>
+        </Col>
+      </Row>
+    </ListGroup.Item>
   ))
 
   return (
-    <div className="row">
+    <ListGroup as="ul">
       <ul>{positionsJsx}</ul>
-    </div>
+    </ListGroup>
   )
 }
 export default Positions

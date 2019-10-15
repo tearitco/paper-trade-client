@@ -3,6 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
 import { Form, Button, Col, Row } from 'react-bootstrap'
+import Positions from '../Position/Positions'
 
 const Portfolio = ({ user, alerts, match }) => {
   const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
@@ -171,7 +172,11 @@ const Portfolio = ({ user, alerts, match }) => {
             <Button variant="primary" type="submit">Withdraw</Button>
           </Form.Group>
         </Form>
-        <Button variant="primary" onClick={destroy}>Close account</Button>
+        <Positions
+          user={user}
+          alerts={alerts}
+        />
+        <Button variant="danger" onClick={destroy}>Close account</Button>
       </div>
     </div>
   )

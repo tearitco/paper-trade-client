@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
 import { Link } from 'react-router-dom'
-import Positions from '../Position/Positions'
+import { ListGroup, Col, Row } from 'react-bootstrap'
 
 const Portfolios = ({ user, alerts }) => {
   const [portfolios, setPortfolios] = useState([])
-  const [hasPositions, setHasPositions] = useState(null)
 
   useEffect(() => {
     axios({
@@ -20,32 +19,28 @@ const Portfolios = ({ user, alerts }) => {
       .catch(console.error)
   }, [])
 
-  const show = () => {
-    console.log(hasPositions)
-    hasPositions ? setHasPositions(false) : setHasPositions(true)
-    console.log(hasPositions)
-  }
-
   const portfoliosJsx = portfolios.map(portfolio => (
-    <div className="row" key={portfolio.id}>
-      <div className="col-4">{portfolio.name}</div>
-      <div className="col-4">{portfolio.balance}</div>
-      <div className="col-4">
-        <Link to={`/portfolios/${portfolio.id}`}>
-      Accout details
-        </Link>
-      </div>
-    </div>
+    <ListGroup.Item as="li" key={portfolio.id}>
+      <Row>
+        <Col>
+          {portfolio.name}
+        </Col>
+        <Col>
+          {portfolio.balance}
+        </Col>
+        <Col>
+          <Link to={`/portfolios/${portfolio.id}`}>
+  Accout details
+          </Link>
+        </Col>
+      </Row>
+    </ListGroup.Item>
   ))
 
   return (
-    <div>
-      <ul>{portfoliosJsx}</ul>
-      <button onClick={show}>{hasPositions ? 'Hide' : 'Show'}</button>
-      <div>{hasPositions ? <Positions
-        user={user}
-      /> : ''}</div>
-    </div>
+    <ListGroup as="ul">
+      {portfoliosJsx}
+    </ListGroup>
   )
 }
 export default Portfolios
