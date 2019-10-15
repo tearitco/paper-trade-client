@@ -5,7 +5,7 @@ import Positions from '../Position/Positions'
 
 const SideBar = ({ user }) => (
   <Container>
-    <Col sm={4}>
+    <Col>
       <Accordion defaultActiveKey="1">
         <Card>
           <Card.Header>

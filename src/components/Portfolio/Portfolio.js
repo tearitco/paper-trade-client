@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { withRouter, Redirect } from 'react-router-dom'
+import { withRouter, Redirect, Link } from 'react-router-dom'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
 import { Form, Button, Col, Row } from 'react-bootstrap'
@@ -100,6 +100,9 @@ const Portfolio = ({ user, alerts, match }) => {
 
   return (
     <div>
+      <Link to={'/main'}>
+        <Button>Back</Button>
+      </Link>
       <header>
         <p>Account Details</p>
       </header>
