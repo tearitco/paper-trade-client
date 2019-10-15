@@ -8,6 +8,7 @@ const Portfolio = ({ user, alerts, match }) => {
   const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
   const [deleted, setDeleted] = useState(false)
   const [addedValue, setAddedValue] = useState(0)
+  const [withdraw, setWithdraw] = useState(0)
 
   useEffect(() => {
     axios({
@@ -56,9 +57,28 @@ const Portfolio = ({ user, alerts, match }) => {
     event.persist()
     setAddedValue(event.target.value)
   }
+  const handleWithdrawChange = event => {
+    event.persist()
+    setWithdraw(event.target.value)
+  }
   const handleAddValueSubmit = event => {
     event.preventDefault()
     portfolio.balance = portfolio.balance + parseInt(addedValue)
+    axios({
+      url: `${apiUrl}/portfolios/${match.params.id}`,
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Token token=${user.token}`
+      },
+      data: { portfolio }
+    })
+      .then(res => setPortfolio(res.data.portfolio))
+      .catch(console.error)
+  }
+
+  const handleWithdrawSubmit = event => {
+    event.preventDefault()
+    portfolio.balance = portfolio.balance - parseInt(withdraw)
     axios({
       url: `${apiUrl}/portfolios/${match.params.id}`,
       method: 'PATCH',
@@ -131,6 +151,24 @@ const Portfolio = ({ user, alerts, match }) => {
                 required />
             </Col>
             <Button variant="primary" type="submit">Add Value</Button>
+          </Form.Group>
+        </Form>
+
+        <Form onSubmit={handleWithdrawSubmit}>
+          <Form.Group as={Row} controlid="balance">
+            <Form.Label column sm={2}>
+         Witdraw money:
+            </Form.Label>
+            <Col sm={8}>
+              <Form.Control
+                type="number"
+                placeholder="Add Value"
+                name="balance"
+                value={withdraw}
+                onChange={handleWithdrawChange}
+                required />
+            </Col>
+            <Button variant="primary" type="submit">Withdraw</Button>
           </Form.Group>
         </Form>
         <Button variant="primary" onClick={destroy}>Close account</Button>
