@@ -28,7 +28,6 @@ const PortfolioUpdate = ({ user, alerts, match }) => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    console.log(portfolio)
     axios({
       url: `${apiUrl}/portfolios/${match.params.id}`,
       method: 'PATCH',

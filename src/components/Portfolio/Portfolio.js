@@ -48,16 +48,27 @@ const Portfolio = ({ user, alerts, match }) => {
       },
       data: { portfolio }
     })
-      // .then(res => setUpdated(res.data.portfolio.id))
       .then(res => setPortfolio(res.data.portfolio))
       .catch(console.error)
   }
 
-  const handleAddValue = event => {
+  const handleAddValueChange = event => {
     event.persist()
     setAddedValue(event.target.value)
-    portfolio.balance = portfolio.balance + parseInt(event.target.value)
-    console.log(portfolio)
+  }
+  const handleAddValueSubmit = event => {
+    event.preventDefault()
+    portfolio.balance = portfolio.balance + parseInt(addedValue)
+    axios({
+      url: `${apiUrl}/portfolios/${match.params.id}`,
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Token token=${user.token}`
+      },
+      data: { portfolio }
+    })
+      .then(res => setPortfolio(res.data.portfolio))
+      .catch(console.error)
   }
 
   if (deleted) {
@@ -105,7 +116,7 @@ const Portfolio = ({ user, alerts, match }) => {
           </Form.Group>
         </Form>
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleAddValueSubmit}>
           <Form.Group as={Row} controlid="balance">
             <Form.Label column sm={2}>
          Add Value:
@@ -116,7 +127,7 @@ const Portfolio = ({ user, alerts, match }) => {
                 placeholder="Add Value"
                 name="balance"
                 value={addedValue}
-                onChange={handleAddValue}
+                onChange={handleAddValueChange}
                 required />
             </Col>
             <Button variant="primary" type="submit">Add Value</Button>
