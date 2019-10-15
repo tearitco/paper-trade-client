@@ -1,8 +1,12 @@
 import React from 'react'
+import SideBar from './SideBar'
 
-const Layout = props => (
+const Layout = ({ user, alert }) => (
   <div>
-    {props.children}
+    <SideBar
+      user={user}
+      alert={alert}
+    />
   </div>
 )
 

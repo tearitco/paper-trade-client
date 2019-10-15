@@ -8,10 +8,11 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
-import Portfolios from '../Portfolio/Portfolios'
+// import Portfolios from '../Portfolio/Portfolios'
 import PortfolioCreate from '../Portfolio/PortfolioCreate'
 import PortfolioUpdate from '../Portfolio/PortfolioUpdate'
 import Portfolio from '../Portfolio/Portfolio'
+import Layout from '../Shared/Layout'
 
 class App extends Component {
   constructor () {
@@ -58,8 +59,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/account' render={() => (
-            <Portfolios alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} path='/main' render={() => (
+            <Layout alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create' render={() => (
             <PortfolioCreate alert={this.alert} user={user} />

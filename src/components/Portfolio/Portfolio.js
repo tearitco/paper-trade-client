@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { withRouter, Redirect, Link } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
+import { Form, Button, Col, Row } from 'react-bootstrap'
 
 const Portfolio = ({ user, alerts, match }) => {
   const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
   const [deleted, setDeleted] = useState(false)
+  const [addedValue, setAddedValue] = useState(0)
 
   useEffect(() => {
     axios({
@@ -18,6 +20,7 @@ const Portfolio = ({ user, alerts, match }) => {
       .then(res => setPortfolio(res.data.portfolio))
       .catch(console.error)
   }, [])
+
   const destroy = () => {
     axios({
       url: `${apiUrl}/portfolios/${match.params.id}`,
@@ -30,18 +33,97 @@ const Portfolio = ({ user, alerts, match }) => {
       .catch(console.error)
   }
 
+  const handleChange = event => {
+    event.persist()
+    setPortfolio(portfolio => ({ ...portfolio, [event.target.name]: event.target.value }))
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    axios({
+      url: `${apiUrl}/portfolios/${match.params.id}`,
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Token token=${user.token}`
+      },
+      data: { portfolio }
+    })
+      // .then(res => setUpdated(res.data.portfolio.id))
+      .then(res => setPortfolio(res.data.portfolio))
+      .catch(console.error)
+  }
+
+  const handleAddValue = event => {
+    event.persist()
+    setAddedValue(event.target.value)
+    portfolio.balance = portfolio.balance + parseInt(event.target.value)
+    console.log(portfolio)
+  }
+
   if (deleted) {
     return <Redirect to={
-      { pathname: '/account' }
+      { pathname: '/main' }
     } />
   }
 
   return (
     <div>
-      <p>{portfolio.name}</p>
-      <p>{portfolio.balance}</p>
-      <Link to={`/portfolios/${portfolio.id}/edit`}><button>Edit</button></Link>
-      <button onClick={destroy}>Close account</button>
+      <header>
+        <p>Account Details</p>
+      </header>
+      <div>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group as={Row} controlid="name">
+            <Form.Label column sm={2}>
+              Account Name:
+            </Form.Label>
+            <Col sm={8}>
+              <Form.Control
+                type="text"
+                placeholder="Your portfolio"
+                name="name"
+                onChange={handleChange}
+                value={portfolio.name}
+                required
+              />
+            </Col>
+            <Button variant="primary" type="submit" column sm={2}>Update</Button>
+          </Form.Group>
+        </Form>
+
+        <Form onSubmit={handleSubmit}>
+          <Form.Group as={Row}>
+            <Form.Label column sm={2}>
+        Total balance:
+            </Form.Label>
+            <Col sm={8}>
+              <Form.Control
+                placeholder={portfolio.balance}
+                required
+              />
+            </Col>
+          </Form.Group>
+        </Form>
+
+        <Form onSubmit={handleSubmit}>
+          <Form.Group as={Row} controlid="balance">
+            <Form.Label column sm={2}>
+         Add Value:
+            </Form.Label>
+            <Col sm={8}>
+              <Form.Control
+                type="number"
+                placeholder="Add Value"
+                name="balance"
+                value={addedValue}
+                onChange={handleAddValue}
+                required />
+            </Col>
+            <Button variant="primary" type="submit">Add Value</Button>
+          </Form.Group>
+        </Form>
+        <Button variant="primary" onClick={destroy}>Close account</Button>
+      </div>
     </div>
   )
 }
