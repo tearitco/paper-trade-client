@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import Plot from 'react-plotly.js'
 import axios from 'axios'
 
-const Chart = ({ user, alerts }) => {
+const StockChart = ({ user, alerts }) => {
   const [x, setX] = useState([])
   const [y, setY] = useState([])
 
@@ -20,21 +21,29 @@ const Chart = ({ user, alerts }) => {
           yArray.push(res.data['Time Series (Daily)'][key]['1. open'])
         }
         setX(xArray)
+        console.log(x, y)
         setY(yArray)
       })
       .catch(console.error)
   }, [])
-  // const xJsx = x.map(item => (
-  //   <li key={item['1. open']}>{item['1. open']}</li>
-  // ))
 
   return (
     <div>
       <h1>Stock market</h1>
-      <p>x-values: {x}</p>
-      <p>y-values: {y}</p>
+      <Plot
+        data={[
+          {
+            x: x,
+            y: y,
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: 'blue' }
+          }
+        ]}
+        layout={{ width: 640, height: 480, title: 'ticker' }}
+      />
     </div>
   )
 }
 
-export default Chart
+export default StockChart

@@ -1,7 +1,7 @@
 import React from 'react'
 import SideBar from './SideBar'
 import { Row, Col } from 'react-bootstrap'
-import Chart from './Chart'
+import StockChart from '../StockChart/StockChart'
 import OrderBar from './OrderBar'
 
 const Layout = ({ user, alert }) => (
@@ -13,7 +13,7 @@ const Layout = ({ user, alert }) => (
       />
     </Col>
     <Col>
-      <Chart />
+      <StockChart />
       <OrderBar
         user={user}
         alert={alert}
