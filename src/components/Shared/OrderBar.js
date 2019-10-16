@@ -1,14 +1,14 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 
-const OrderBar = () => (
+const OrderBar = ({ user }) => (
   <Container>
     <Row>
-      <p> Name </p>
-      <p> Ticker </p>
-      <p> Last Price </p>
     </Row>
     <Row>
+      <p>Input field</p>
+      <p>Buy</p>
+      <p>Sell</p>
     </Row>
   </Container>
 )

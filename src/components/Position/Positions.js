@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link, withRouter } from 'react-router-dom'
 import apiUrl from './../../apiConfig'
 import { ListGroup, Col, Row } from 'react-bootstrap'
 
-const Positions = ({ user, alerts }) => {
+const Positions = ({ user, alerts, match }) => {
   const [positions, setPositions] = useState([])
 
   useEffect(() => {
@@ -24,7 +25,9 @@ const Positions = ({ user, alerts }) => {
         <Col sm={12} md={3}>
           <Row>
             <p>Company:</p>
-            {position.name}
+            <Link to={`positions/${position.id}`}>
+              {position.name}
+            </Link>
           </Row>
         </Col>
         <Col sm={12} md={3}>
@@ -55,4 +58,4 @@ const Positions = ({ user, alerts }) => {
     </ListGroup>
   )
 }
-export default Positions
+export default withRouter(Positions)

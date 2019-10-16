@@ -8,10 +8,10 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
-// import Portfolios from '../Portfolio/Portfolios'
+import Portfolio from '../Portfolio/Portfolio'
 import PortfolioCreate from '../Portfolio/PortfolioCreate'
 import PortfolioUpdate from '../Portfolio/PortfolioUpdate'
-import Portfolio from '../Portfolio/Portfolio'
+import Position from '../Position/Position'
 import Layout from '../Shared/Layout'
 
 class App extends Component {
@@ -70,6 +70,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/portfolios/:id' render={() => (
             <Portfolio alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/positions/:id' render={() => (
+            <Position alert={this.alert} user={user} />
           )} />
         </main>
       </Fragment>
