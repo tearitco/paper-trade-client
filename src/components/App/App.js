@@ -13,6 +13,7 @@ import PortfolioCreate from '../Portfolio/PortfolioCreate'
 import PortfolioUpdate from '../Portfolio/PortfolioUpdate'
 import Position from '../Position/Position'
 import Layout from '../Shared/Layout'
+import Chart from '../Chart/Chart'
 
 class App extends Component {
   constructor () {
@@ -73,6 +74,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/positions/:id' render={() => (
             <Position alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/chart' render={() => (
+            <Chart alert={this.alert} user={user} />
           )} />
         </main>
       </Fragment>

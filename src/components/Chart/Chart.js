@@ -8,11 +8,22 @@ const Chart = () => {
   useEffect(() => {
     const apiKey = 'RLK58ECSXKJPO3S2'
     const ticker = 'AMZN'
+    const stockChartXValuesFunction = []
+    const stockChartYValuesFunction = []
     axios({
       method: 'GET',
       url: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&outputsize=compact&apikey=${apiKey}`
     })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res.data['Time Series (Daily)'])
+        for (const key in res.data['Time Series (Daily)']) {
+          stockChartXValuesFunction.push(key)
+          stockChartYValuesFunction.push(res.data['Time Series (Daily)'][key]['1. open'])
+        }
+
+        console.log(stockChartXValuesFunction)
+      })
+      .catch(console.error)
   }, [])
 
   return (
@@ -21,40 +32,3 @@ const Chart = () => {
 }
 
 export default Chart
-// class Chart extends React.Component {
-//   constructor (props) {
-//     super(props)
-//     this.state = {
-//       stockChartXValues: [],
-//       stockChartYValues: []
-//     }
-//   }
-//
-//   componentdidMount () {
-//     this.fetchStock()
-//   }
-//
-//   fetchStock () {
-//     const API_KEY = 'RLK58ECSXKJPO3S2'
-//     const API_CALL = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=compact&apikey=${API_KEY}`
-//
-//     fetch(API_CALL)
-//       .then(
-//         function (response) {
-//           return response.json()
-//         }
-//       )
-//       .then(
-//         function (data) {
-//           console.log(data)
-//         }
-//       )
-//   }
-//   render () {
-//     return (
-//       <div>
-//         <h1> Stock Market </h1>
-//       </div>
-//     )
-//   }
-// }
