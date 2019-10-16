@@ -1,33 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const Chart = () => {
-  // const [stockChartXValues, setStockChartXValues] = useState([])
-  // const [stockChartYValues, setStockChartYValues] = useState([])
+const Chart = ({ user, alerts }) => {
+  const [x, setX] = useState([])
+  const [y, setY] = useState([])
 
   useEffect(() => {
     const apiKey = 'RLK58ECSXKJPO3S2'
     const ticker = 'AMZN'
-    const stockChartXValuesFunction = []
-    const stockChartYValuesFunction = []
+    const xArray = []
+    const yArray = []
     axios({
       method: 'GET',
       url: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&outputsize=compact&apikey=${apiKey}`
     })
       .then(res => {
-        console.log(res.data['Time Series (Daily)'])
         for (const key in res.data['Time Series (Daily)']) {
-          stockChartXValuesFunction.push(key)
-          stockChartYValuesFunction.push(res.data['Time Series (Daily)'][key]['1. open'])
+          xArray.push(key)
+          yArray.push(res.data['Time Series (Daily)'][key]['1. open'])
         }
-
-        console.log(stockChartXValuesFunction)
+        setX(xArray)
+        setY(yArray)
       })
       .catch(console.error)
   }, [])
+  // const xJsx = x.map(item => (
+  //   <li key={item['1. open']}>{item['1. open']}</li>
+  // ))
 
   return (
-    <h1>Stonks</h1>
+    <div>
+      <h1>Stock market</h1>
+      <p>x-values: {x}</p>
+      <p>y-values: {y}</p>
+    </div>
   )
 }
 
