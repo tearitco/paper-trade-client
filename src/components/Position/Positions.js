@@ -51,7 +51,7 @@ const Positions = ({ user, alerts }) => {
 
   return (
     <ListGroup as="ul">
-      <ul>{positionsJsx}</ul>
+      {positionsJsx}
     </ListGroup>
   )
 }

@@ -6,23 +6,36 @@ import Positions from '../Position/Positions'
 const SideBar = ({ user }) => (
   <Container>
     <Col>
-      <Accordion defaultActiveKey="1">
+      <Accordion defaultActiveKey="0">
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+            <Accordion.Toggle as={Button} variant="link" eventKey="1">
                My Accounts
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="0">
+          <Accordion.Collapse eventKey="1">
             <Card.Body>
               <Portfolios
                 user={user}/>
             </Card.Body>
           </Accordion.Collapse>
         </Card>
-        <Positions
-          user={user}
-        />
+      </Accordion>
+      <Accordion defaultActiveKey="0">
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+            Open positions
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="1">
+            <Card.Body>
+              <Positions
+                user={user}
+              />
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
       </Accordion>
     </Col>
   </Container>
