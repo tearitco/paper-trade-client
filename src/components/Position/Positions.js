@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 import apiUrl from './../../apiConfig'
-import { ListGroup, Col, Row } from 'react-bootstrap'
+import { ListGroup, Col, Row, Button } from 'react-bootstrap'
 
 const Positions = ({ user, alerts, match }) => {
   const [positions, setPositions] = useState([])
@@ -18,6 +18,18 @@ const Positions = ({ user, alerts, match }) => {
       .then(responseData => setPositions(responseData.data.positions))
       .catch(console.error)
   }, [])
+
+  const rerender = () => {
+    axios({
+      method: 'GET',
+      url: `${apiUrl}/positions`,
+      headers: {
+        'Authorization': `Token token=${user.token}`
+      }
+    })
+      .then(responseData => setPositions(responseData.data.positions))
+      .catch(console.error)
+  }
 
   const positionsJsx = positions.map(position => (
     <ListGroup.Item as="li" key={position.id}>
@@ -48,6 +60,20 @@ const Positions = ({ user, alerts, match }) => {
             {position.price}
           </Row>
         </Col>
+        <Button variant="danger"
+          onClick={() => {
+            axios({
+              method: 'DELETE',
+              url: `${apiUrl}/positions/${position.id}`,
+              headers: {
+                'Authorization': `Token token=${user.token}`
+              }
+            })
+              .then(rerender())
+              .catch(console.error)
+          }}>
+        Close Position
+        </Button>
       </Row>
     </ListGroup.Item>
   ))

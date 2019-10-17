@@ -2,9 +2,11 @@ import React from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import AccountInfo from './AccountInfo'
 
-const FormO = ({ user, alerts, handleChange, handleSubmit, ticker, volume, price }) => (
+const FormO = ({ user, alerts, handleChange, handleSubmit, ticker, volume, price, portfolioid }) => (
   <Form onSubmit={handleSubmit}>
-    <AccountInfo />
+    <AccountInfo
+      portfolioid={portfolioid}
+    />
     <Row>
       <Col lg={3}>
         <Form.Group controlid="ticker">

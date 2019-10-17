@@ -3,7 +3,7 @@ import FormO from './FormO'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
 
-const OrderForm = ({ user, price, company }) => {
+const OrderForm = ({ user, price, company, portfolioid }) => {
   const [position, setPosition] = useState({ ticker: company, volume: 0, price: price, portfolio_id: '' })
 
   const handleChange = event => {
@@ -25,7 +25,7 @@ const OrderForm = ({ user, price, company }) => {
           'ticker': company,
           'volume': position.volume,
           'price': price,
-          'portfolio_id': 1
+          'portfolio_id': portfolioid
         }
       }
     })
@@ -38,6 +38,7 @@ const OrderForm = ({ user, price, company }) => {
       ticker={company}
       volume={position.volume}
       price={price}
+      portfolioid={portfolioid}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
     />
