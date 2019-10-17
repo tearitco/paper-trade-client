@@ -1,7 +1,6 @@
 import React from 'react'
 import SideBar from './SideBar'
 import { Row, Col } from 'react-bootstrap'
-// import StockChart from '../StockChart/StockChart'
 import OrderBar from './OrderBar'
 
 const Layout = ({ user, alert }) => (

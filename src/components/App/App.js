@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment, Component } from 'react'
 import { Route } from 'react-router-dom'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
@@ -13,7 +13,6 @@ import PortfolioCreate from '../Portfolio/PortfolioCreate'
 import PortfolioUpdate from '../Portfolio/PortfolioUpdate'
 import Position from '../Position/Position'
 import Layout from '../Shared/Layout'
-import StockChart from '../StockChart/StockChart'
 
 class App extends Component {
   constructor () {
@@ -75,13 +74,9 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/positions/:id' render={() => (
             <Position alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/chart' render={() => (
-            <StockChart alert={this.alert} user={user} />
-          )} />
         </main>
       </Fragment>
     )
   }
 }
-
 export default App
