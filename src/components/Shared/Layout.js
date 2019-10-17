@@ -71,12 +71,6 @@ const Layout = ({ user, alert, match }) => {
       </Col>
       <Col>
         <Container>
-          <TickerInput
-            company={company}
-            price={price}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
           <Plot
             data={[
               {
@@ -88,6 +82,12 @@ const Layout = ({ user, alert, match }) => {
               }
             ]}
             layout={{ width: 640, height: 480, title: `${company} Last Price: ${price}` }}
+          />
+          <TickerInput
+            company={company}
+            price={price}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
           />
           <Orders
             portfolioid={portfolio}
