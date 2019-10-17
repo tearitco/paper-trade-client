@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { withRouter, Redirect, Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
 import { Form, Button, Col, Row } from 'react-bootstrap'
@@ -7,7 +7,6 @@ import Positions from '../Position/Positions'
 
 const Portfolio = ({ user, alerts, match }) => {
   const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
-  const [deleted, setDeleted] = useState(false)
   const [addedValue, setAddedValue] = useState(0)
   const [withdraw, setWithdraw] = useState(0)
 
@@ -22,18 +21,6 @@ const Portfolio = ({ user, alerts, match }) => {
       .then(res => setPortfolio(res.data.portfolio))
       .catch(console.error)
   }, [])
-
-  const destroy = () => {
-    axios({
-      url: `${apiUrl}/portfolios/${match.params.id}`,
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Token token=${user.token}`
-      }
-    })
-      .then(() => setDeleted(true))
-      .catch(console.error)
-  }
 
   const handleChange = event => {
     event.persist()
@@ -90,12 +77,6 @@ const Portfolio = ({ user, alerts, match }) => {
     })
       .then(res => setPortfolio(res.data.portfolio))
       .catch(console.error)
-  }
-
-  if (deleted) {
-    return <Redirect to={
-      { pathname: '/main' }
-    } />
   }
 
   return (
@@ -179,7 +160,6 @@ const Portfolio = ({ user, alerts, match }) => {
           user={user}
           alerts={alerts}
         />
-        <Button variant="danger" onClick={destroy}>Close account</Button>
       </div>
     </div>
   )
