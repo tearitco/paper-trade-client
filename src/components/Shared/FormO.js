@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 
-const FormO = ({ user, alerts, handleChange, handleSubmit, ticker, volume, price, portfolioid }) => (
+const FormO = ({ user, alerts, handleChange, handleSubmit, ticker, volume, price }) => (
   <Form onSubmit={handleSubmit}>
     <Row>
       <Col lg={3}>

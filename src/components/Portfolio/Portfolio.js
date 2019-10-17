@@ -103,7 +103,7 @@ const Portfolio = ({ user, alerts, match }) => {
                 required
               />
             </Col>
-            <Button variant="primary" type="submit" column sm={2}>Update</Button>
+            <Button variant="primary" type="submit">Update</Button>
           </Form.Group>
         </Form>
 

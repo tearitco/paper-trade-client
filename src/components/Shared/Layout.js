@@ -23,7 +23,7 @@ const Layout = ({ user, alert, match }) => {
       }
     })
       .then(responseData => {
-        setPortfolio(responseData.data.portfolios[0].id)
+        setPortfolio(responseData.data.portfolios[0])
       })
       .catch(console.error)
   }, [])
@@ -90,7 +90,7 @@ const Layout = ({ user, alert, match }) => {
             handleSubmit={handleSubmit}
           />
           <Orders
-            portfolioid={portfolio}
+            portfolio={portfolio}
             user={user}
             company={company}
             price={price}

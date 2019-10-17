@@ -69,7 +69,11 @@ const Positions = ({ user, alerts, match }) => {
                 'Authorization': `Token token=${user.token}`
               }
             })
-              .then(rerender())
+              .then(res => {
+                if (res) {
+                  rerender()
+                }
+              })
               .catch(console.error)
           }}>
         Close Position
