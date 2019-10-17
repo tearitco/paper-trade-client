@@ -1,9 +1,9 @@
 import React from 'react'
 import SideBar from './SideBar'
 import { Row, Col } from 'react-bootstrap'
-import OrderBar from './OrderBar'
+import MainField from './MainField'
 
-const Layout = ({ user, alert }) => (
+const Layout = ({ portfolio, user, alert }) => (
   <Row>
     <Col>
       <SideBar
@@ -12,9 +12,10 @@ const Layout = ({ user, alert }) => (
       />
     </Col>
     <Col>
-      <OrderBar
+      <MainField
         user={user}
         alert={alert}
+        portfolio={portfolio}
       />
     </Col>
   </Row>

@@ -5,7 +5,7 @@ import Orders from '../Order/Orders'
 import axios from 'axios'
 import Plot from 'react-plotly.js'
 
-const MainField = ({ user, alerts, match }) => {
+const MainField = ({ portfolio, user, alerts, match }) => {
   const [company, setCompany] = useState('')
   const [price, setPrice] = useState(0)
   const [x, setX] = useState([])
@@ -64,6 +64,10 @@ const MainField = ({ user, alerts, match }) => {
         layout={{ width: 640, height: 480, title: `${company} Last Price: ${price}` }}
       />
       <Orders
+        user={user}
+        portfolio={portfolio}
+        company={company}
+        price={price}
       />
     </Container>
   )

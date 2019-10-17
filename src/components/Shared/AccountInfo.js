@@ -1,18 +1,17 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 
-const AccountInfo = ({ user, alerts, match }) => (
-  <Row>
-    <Col>
-      <p>Account</p>
-    </Col>
-    <Col>
-      {name}
-    </Col>
-    <Col>
-      <p>{balance}</p>
-    </Col>
-  </Row>
+const AccountInfo = ({ user, alerts, portfolio }) => (
+  <Form.Group controlid="portfolio">
+    <Form.Label>Portfolio</Form.Label>
+    <Form.Control
+      type="text"
+      placeholder="What Account?"
+      name="portfolio"
+      value={'portfolio.id'}
+      required
+    />
+  </Form.Group>
 )
 
 export default AccountInfo
