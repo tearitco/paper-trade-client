@@ -33,7 +33,7 @@ const OrderForm = ({ alert, company, portfolio, price, user }) => {
         }
       })
         .then(() => {
-          setPosition({ ticker: '', volume: null, price: '', portfolio_id: '', side: 'Long' })
+          setPosition({ ticker: '', volume: '', price: '', portfolio_id: '', side: 'Long' })
         })
         .then(() => {
           alert({

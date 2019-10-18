@@ -4,7 +4,7 @@ import apiUrl from './../../apiConfig'
 import axios from 'axios'
 
 const PortfolioCreate = ({ user, alert }) => {
-  const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
+  const [portfolio, setPortfolio] = useState({ name: '', balance: null })
 
   const handleChange = event => {
     event.persist()
@@ -13,7 +13,6 @@ const PortfolioCreate = ({ user, alert }) => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    console.log(portfolio)
     axios({
       url: `${apiUrl}/portfolios`,
       method: 'POST',
@@ -22,6 +21,7 @@ const PortfolioCreate = ({ user, alert }) => {
       },
       data: { portfolio }
     })
+      .then(setPortfolio({ name: '', balance: null }))
       .then(() => {
         alert({
           heading: 'Yeeeess!',
@@ -30,6 +30,7 @@ const PortfolioCreate = ({ user, alert }) => {
         })
       })
       .catch(() => {
+        setPortfolio({ name: '', balance: 0 })
         alert({
           heading: 'Oops',
           message: 'Something went wrong',

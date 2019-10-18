@@ -80,6 +80,7 @@ const Portfolio = ({ user, alert, match }) => {
     })
       .then(res => setPortfolio(res.data.portfolio))
       .then(() => {
+        setAddedValue(0)
         alert({
           heading: 'Good',
           message: 'Money added',
@@ -108,6 +109,7 @@ const Portfolio = ({ user, alert, match }) => {
     })
       .then(res => setPortfolio(res.data.portfolio))
       .then(() => {
+        setWithdraw(0)
         alert({
           heading: 'Nice',
           message: 'Withdrawal successful',

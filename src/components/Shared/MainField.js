@@ -13,7 +13,6 @@ const MainField = ({ portfolio, user, alert, match }) => {
 
   const handleChange = event => {
     event.persist()
-    console.log(event.target.value)
     setCompany(event.target.value)
   }
 

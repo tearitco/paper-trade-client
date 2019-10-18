@@ -43,7 +43,6 @@ const Positions = ({ user, alert, match, portfolio }) => {
         <Button variant="danger"
           onClick={() => {
             const total = (parseInt(position.price) * parseInt(position.volume))
-            console.log('total', total)
             const newBalance = (portfolio.balance + total)
             axios({
               method: 'DELETE',
