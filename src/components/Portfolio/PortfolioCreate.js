@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import PortfolioForm from '../Shared/PortfolioForm'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
 
-const PortfolioCreate = ({ user, alert }) => {
-  const [portfolio, setPortfolio] = useState({ name: '', balance: null })
+const PortfolioCreate = ({ user, alert, history }) => {
+  const [portfolio, setPortfolio] = useState({ name: '', balance: '' })
 
   const handleChange = event => {
     event.persist()
@@ -21,7 +22,7 @@ const PortfolioCreate = ({ user, alert }) => {
       },
       data: { portfolio }
     })
-      .then(setPortfolio({ name: '', balance: null }))
+      .then(() => history.push('/main'))
       .then(() => {
         alert({
           heading: 'Yeeeess!',
@@ -48,4 +49,4 @@ const PortfolioCreate = ({ user, alert }) => {
   )
 }
 
-export default PortfolioCreate
+export default withRouter(PortfolioCreate)

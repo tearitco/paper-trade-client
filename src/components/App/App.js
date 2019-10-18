@@ -63,7 +63,7 @@ class App extends Component {
             <Layout alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create' render={() => (
-            <PortfolioCreate alert={this.alert} user={user} />
+            <PortfolioCreate alert={this.alert} user={user} history={history} />
           )} />
           <AuthenticatedRoute user={user} path='/portfolios/:id/edit' render={() => (
             <PortfolioUpdate alert={this.alert} user={user} />
