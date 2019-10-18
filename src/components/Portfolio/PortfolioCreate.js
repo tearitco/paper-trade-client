@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import PortfolioForm from '../Shared/PortfolioForm'
-// import Redirect from 'react-router-dom'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
 
-const PortfolioCreate = ({ user, alerts }) => {
+const PortfolioCreate = ({ user, alert }) => {
   const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
-  const [createdPortfolioId, setCreatedPortfolioId] = useState(null)
 
   const handleChange = event => {
     event.persist()
@@ -24,11 +22,20 @@ const PortfolioCreate = ({ user, alerts }) => {
       },
       data: { portfolio }
     })
-      .then(res => setCreatedPortfolioId(res.data.portfolio.id))
-      .catch(console.error)
-  }
-  if (createdPortfolioId) {
-    console.log(portfolio)
+      .then(() => {
+        alert({
+          heading: 'Yeeeess!',
+          message: 'Created successfully',
+          variant: 'success'
+        })
+      })
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }
 
   return (

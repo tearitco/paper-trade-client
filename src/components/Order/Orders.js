@@ -2,13 +2,14 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import OrderForm from '../Shared/OrderForm'
 
-const Orders = ({ portfolio, user, company, price, name, balance }) => (
+const Orders = ({ alert, company, portfolio, price, user }) => (
   <Container>
     <OrderForm
-      user={user}
+      alert={alert}
       company={company}
-      price={price}
       portfolio={portfolio}
+      price={price}
+      user={user}
     />
   </Container>
 )

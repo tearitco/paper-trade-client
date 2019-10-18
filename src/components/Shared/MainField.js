@@ -5,7 +5,7 @@ import Orders from '../Order/Orders'
 import axios from 'axios'
 import Plot from 'react-plotly.js'
 
-const MainField = ({ portfolio, user, alerts, match }) => {
+const MainField = ({ portfolio, user, alert, match }) => {
   const [company, setCompany] = useState('')
   const [price, setPrice] = useState(0)
   const [x, setX] = useState([])
@@ -41,11 +41,18 @@ const MainField = ({ portfolio, user, alerts, match }) => {
             setY(yArray)
           })
       )
-      .catch(console.error)
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }
   return (
     <Container>
       <TickerInput
+        alert={alert}
         company={company}
         price={price}
         handleChange={handleChange}
@@ -64,6 +71,7 @@ const MainField = ({ portfolio, user, alerts, match }) => {
         layout={{ width: 640, height: 480, title: `${company} Last Price: ${price}` }}
       />
       <Orders
+        alert={alert}
         user={user}
         portfolio={portfolio}
         company={company}

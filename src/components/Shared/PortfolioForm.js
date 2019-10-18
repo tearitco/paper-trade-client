@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
-const PortfolioForm = ({ portfolio, handleChange, handleSubmit }) => {
+const PortfolioForm = ({ alert, portfolio, handleChange, handleSubmit }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlid="name">

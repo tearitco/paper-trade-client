@@ -3,9 +3,8 @@ import { withRouter, Link } from 'react-router-dom'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
 import { Form, Button, Col, Row } from 'react-bootstrap'
-import Positions from '../Position/Positions'
 
-const Portfolio = ({ user, alerts, match }) => {
+const Portfolio = ({ user, alert, match }) => {
   const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
   const [addedValue, setAddedValue] = useState(0)
   const [withdraw, setWithdraw] = useState(0)
@@ -19,7 +18,13 @@ const Portfolio = ({ user, alerts, match }) => {
       }
     })
       .then(res => setPortfolio(res.data.portfolio))
-      .catch(console.error)
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }, [])
 
   const handleChange = event => {
@@ -38,7 +43,20 @@ const Portfolio = ({ user, alerts, match }) => {
       data: { portfolio }
     })
       .then(res => setPortfolio(res.data.portfolio))
-      .catch(console.error)
+      .then(() => {
+        alert({
+          heading: 'Cool',
+          message: 'Renamed successfully',
+          variant: 'success'
+        })
+      })
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }
 
   const handleAddValueChange = event => {
@@ -61,7 +79,20 @@ const Portfolio = ({ user, alerts, match }) => {
       data: { portfolio }
     })
       .then(res => setPortfolio(res.data.portfolio))
-      .catch(console.error)
+      .then(() => {
+        alert({
+          heading: 'Good',
+          message: 'Money added',
+          variant: 'success'
+        })
+      })
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }
 
   const handleWithdrawSubmit = event => {
@@ -76,7 +107,20 @@ const Portfolio = ({ user, alerts, match }) => {
       data: { portfolio }
     })
       .then(res => setPortfolio(res.data.portfolio))
-      .catch(console.error)
+      .then(() => {
+        alert({
+          heading: 'Nice',
+          message: 'Withdrawal successful',
+          variant: 'success'
+        })
+      })
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }
 
   return (
@@ -156,10 +200,6 @@ const Portfolio = ({ user, alerts, match }) => {
             <Button variant="primary" type="submit">Withdraw</Button>
           </Form.Group>
         </Form>
-        <Positions
-          user={user}
-          alerts={alerts}
-        />
       </div>
     </div>
   )

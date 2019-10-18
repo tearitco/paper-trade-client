@@ -16,8 +16,14 @@ const Portfolios = ({ user, alerts }) => {
       }
     })
       .then(responseData => setPortfolios(responseData.data.portfolios))
-      .catch(console.error)
-  }, [])
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
+  })
 
   const portfoliosJsx = portfolios.map(portfolio => (
     <ListGroup.Item as="li" key={portfolio.id}>

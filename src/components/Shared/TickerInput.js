@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button, Container, Col, Row } from 'react-bootstrap'
 
-const TickerInput = ({ company, handleSubmit, handleChange }) => {
+const TickerInput = ({ alert, user, company, handleSubmit, handleChange }) => {
   return (
     <Container>
       <Form onSubmit={handleSubmit}>

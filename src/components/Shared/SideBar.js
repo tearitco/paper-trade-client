@@ -3,7 +3,7 @@ import { Accordion, Card, Button, Container, Col } from 'react-bootstrap'
 import Portfolios from '../Portfolio/Portfolios'
 import Positions from '../Position/Positions'
 
-const SideBar = ({ user }) => (
+const SideBar = ({ user, alert, portfolio }) => (
   <Container>
     <Col>
       <Accordion defaultActiveKey="0">
@@ -16,6 +16,7 @@ const SideBar = ({ user }) => (
           <Accordion.Collapse eventKey="1">
             <Card.Body>
               <Portfolios
+                alert={alert}
                 user={user}/>
             </Card.Body>
           </Accordion.Collapse>
@@ -31,6 +32,8 @@ const SideBar = ({ user }) => (
           <Accordion.Collapse eventKey="1">
             <Card.Body>
               <Positions
+                alert={alert}
+                portfolio={portfolio}
                 user={user}
               />
             </Card.Body>

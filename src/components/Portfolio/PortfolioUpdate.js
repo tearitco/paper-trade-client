@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import PortfolioForm from '../Shared/PortfolioForm'
 import { withRouter } from 'react-router-dom'
-// import Redirect from 'react-router-dom'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
 
 const PortfolioUpdate = ({ user, alerts, match }) => {
   const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
-  const [updated, setUpdated] = useState(null)
 
   useEffect(() => {
     axios({
@@ -18,7 +16,13 @@ const PortfolioUpdate = ({ user, alerts, match }) => {
       }
     })
       .then(res => setPortfolio(res.data.portfolio))
-      .catch(console.log)
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }, [])
 
   const handleChange = event => {
@@ -36,11 +40,20 @@ const PortfolioUpdate = ({ user, alerts, match }) => {
       },
       data: { portfolio }
     })
-      .then(res => setUpdated(res.data.portfolio.id))
-      .catch(console.error)
-  }
-  if (updated) {
-    console.log(portfolio)
+      .then(() => {
+        alert({
+          heading: 'Good',
+          message: 'Updated successfully',
+          variant: 'success'
+        })
+      })
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }
 
   return (

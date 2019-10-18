@@ -71,7 +71,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/portfolios/:id' render={() => (
             <Portfolio alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/positions/:id' render={() => (
+          <AuthenticatedRoute user={user} exact path='/positions' render={() => (
             <Position alert={this.alert} user={user} />
           )} />
         </main>

@@ -25,12 +25,17 @@ const Layout = ({ user, alert, match }) => {
       .then(responseData => {
         setPortfolio(responseData.data.portfolios[0])
       })
-      .catch(console.error)
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }, [])
 
   const handleChange = event => {
     event.persist()
-    console.log(event.target.value)
     setCompany(event.target.value)
   }
 
@@ -58,13 +63,20 @@ const Layout = ({ user, alert, match }) => {
             setY(yArray)
           })
       )
-      .catch(console.error)
+      .catch(() => {
+        alert({
+          heading: 'Oops',
+          message: 'Something went wrong',
+          variant: 'danger'
+        })
+      })
   }
 
   return (
     <Row>
       <Col>
         <SideBar
+          portfolio={portfolio}
           user={user}
           alert={alert}
         />
@@ -84,12 +96,14 @@ const Layout = ({ user, alert, match }) => {
             layout={{ width: 640, height: 480, title: `${company} Last Price: ${price}` }}
           />
           <TickerInput
+            alert={alert}
             company={company}
             price={price}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
           />
           <Orders
+            alert={alert}
             portfolio={portfolio}
             user={user}
             company={company}
@@ -102,27 +116,3 @@ const Layout = ({ user, alert, match }) => {
 }
 
 export default Layout
-
-// import React from 'react'
-// import SideBar from './SideBar'
-// import { Row, Col } from 'react-bootstrap'
-// import MainField from './MainField'
-//
-// const Layout = ({ user, alert }) => (
-//   <Row>
-//     <Col>
-//       <SideBar
-//         user={user}
-//         alert={alert}
-//       />
-//     </Col>
-//     <Col>
-//       <MainField
-//         user={user}
-//         alert={alert}
-//       />
-//     </Col>
-//   </Row>
-// )
-//
-// export default Layout
