@@ -10,12 +10,14 @@ const Positions = ({ user, alert, match, portfolio }) => {
   useEffect(() => {
     axios({
       method: 'GET',
-      url: `${apiUrl}/positions`,
+      url: `${apiUrl}/portfolios`,
       headers: {
         'Authorization': `Token token=${user.token}`
       }
     })
-      .then(responseData => setPositions(responseData.data.positions))
+      .then(responseData => {
+        setPositions(responseData.data.portfolios[0].positions)
+      })
       .catch(() => {
         alert({
           heading: 'Oops',
