@@ -5,7 +5,7 @@ import apiUrl from './../../apiConfig'
 import axios from 'axios'
 
 const PortfolioUpdate = ({ user, alerts, match }) => {
-  const [portfolio, setPortfolio] = useState({ name: '', balance: 0 })
+  const [portfolio, setPortfolio] = useState({ name: '', balance: '' })
 
   useEffect(() => {
     axios({

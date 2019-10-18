@@ -31,7 +31,7 @@ const PortfolioCreate = ({ user, alert, history }) => {
         })
       })
       .catch(() => {
-        setPortfolio({ name: '', balance: 0 })
+        setPortfolio({ name: '', balance: '' })
         alert({
           heading: 'Oops',
           message: 'Something went wrong',

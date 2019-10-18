@@ -4,7 +4,7 @@ import axios from 'axios'
 import apiUrl from './../../apiConfig'
 
 const OrderForm = ({ alert, company, portfolio, price, user }) => {
-  const [position, setPosition] = useState({ ticker: company, volume: 0, price: price, portfolio_id: '', side: 'Long' })
+  const [position, setPosition] = useState({ ticker: company, volume: '', price: price, portfolio_id: '', side: 'Long' })
 
   const handleChange = event => {
     event.persist()
@@ -57,7 +57,7 @@ const OrderForm = ({ alert, company, portfolio, price, user }) => {
             }
           })
             .catch(() => {
-              setPosition({ ticker: '', volume: 0, price: '', portfolio_id: '', side: 'Long' })
+              setPosition({ ticker: '', volume: '', price: '', portfolio_id: '', side: 'Long' })
               alert({
                 heading: 'Hmmm...',
                 message: 'Something went wrong',
@@ -67,7 +67,7 @@ const OrderForm = ({ alert, company, portfolio, price, user }) => {
         }
         )
         .catch(() => {
-          setPosition({ ticker: '', volume: 0, price: '', portfolio_id: '', side: 'Long' })
+          setPosition({ ticker: '', volume: '', price: '', portfolio_id: '', side: 'Long' })
           alert({
             heading: 'Hmmm...',
             message: 'Something went wrong',

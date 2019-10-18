@@ -7,7 +7,7 @@ import Plot from 'react-plotly.js'
 
 const MainField = ({ portfolio, user, alert, match }) => {
   const [company, setCompany] = useState('')
-  const [price, setPrice] = useState(0)
+  const [price, setPrice] = useState('')
   const [x, setX] = useState([])
   const [y, setY] = useState([])
 
