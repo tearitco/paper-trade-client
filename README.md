@@ -60,16 +60,15 @@ Main actions:
 Only when signed in, as a user, I want to:
 
 Create a trading account with initial amount of money and name
-Delete a trading account
 View my trading account (open positions and balance)
 Add money to my account  - Withdraw money from my account
-Open a long/short position with a company ticker, shares volume and current share price
-Close a long/short position with a company ticker, shares volume and current share price
+Open a long position with a company ticker, shares volume and current share price
+Close a long position
+See real data from a finance API to get real charts and prices
+
+Stretch goals:
 See my total YTD profit/loss percentage
 See my current position profit/loss $ amount
-Stretch goals:
-
-Connect to a finance API to get real charts and prices
 Open multiple positions at a time
 Implement limit and stop orders
 
