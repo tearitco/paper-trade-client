@@ -15,7 +15,6 @@ const OrderForm = ({ alert, company, portfolio, price, user }) => {
     event.preventDefault()
     const total = (parseInt(price) * parseInt(position.volume))
     if (total < portfolio.balance) {
-      const newBalance = (portfolio.balance - total)
       axios({
         url: `${apiUrl}/positions`,
         method: 'POST',
@@ -44,28 +43,39 @@ const OrderForm = ({ alert, company, portfolio, price, user }) => {
         })
         .then(() => {
           axios({
+            method: 'GET',
             url: `${apiUrl}/portfolios/${portfolio.id}`,
-            method: 'PUT',
             headers: {
               'Authorization': `Token token=${user.token}`
-            },
-            data: {
-              'portfolio': {
-                'name': portfolio.name,
-                'balance': newBalance
-              }
             }
           })
-            .catch(() => {
-              setPosition({ ticker: '', volume: '', price: '', portfolio_id: '', side: 'Long' })
-              alert({
-                heading: 'Hmmm...',
-                message: 'Something went wrong',
-                variant: 'danger'
+            .then((res) => {
+              console.log(res)
+              const balance = res.data.portfolio.balance
+              const newBalance = (balance - total)
+              axios({
+                url: `${apiUrl}/portfolios/${portfolio.id}`,
+                method: 'PUT',
+                headers: {
+                  'Authorization': `Token token=${user.token}`
+                },
+                data: {
+                  'portfolio': {
+                    'name': portfolio.name,
+                    'balance': newBalance
+                  }
+                }
               })
             })
-        }
-        )
+        })
+        .catch(() => {
+          setPosition({ ticker: '', volume: '', price: '', portfolio_id: '', side: 'Long' })
+          alert({
+            heading: 'Hmmm...',
+            message: 'Something went wrong',
+            variant: 'danger'
+          })
+        })
         .catch(() => {
           setPosition({ ticker: '', volume: '', price: '', portfolio_id: '', side: 'Long' })
           alert({

@@ -45,7 +45,6 @@ const Positions = ({ user, alert, match, portfolio }) => {
         <Button variant="danger"
           onClick={() => {
             const total = (parseInt(position.price) * parseInt(position.volume))
-            const newBalance = (portfolio.balance + total)
             axios({
               method: 'DELETE',
               url: `${apiUrl}/positions/${position.id}`,
@@ -62,20 +61,31 @@ const Positions = ({ user, alert, match, portfolio }) => {
               })
               .then(() => {
                 axios({
+                  method: 'GET',
                   url: `${apiUrl}/portfolios/${portfolio.id}`,
-                  method: 'PUT',
                   headers: {
                     'Authorization': `Token token=${user.token}`
-                  },
-                  data: {
-                    'portfolio': {
-                      'name': portfolio.name,
-                      'balance': newBalance
-                    }
                   }
                 })
-              }
-              )
+                  .then((res) => {
+                    console.log(res)
+                    const balance = res.data.portfolio.balance
+                    const newBalance = (balance + total)
+                    axios({
+                      url: `${apiUrl}/portfolios/${portfolio.id}`,
+                      method: 'PUT',
+                      headers: {
+                        'Authorization': `Token token=${user.token}`
+                      },
+                      data: {
+                        'portfolio': {
+                          'name': portfolio.name,
+                          'balance': newBalance
+                        }
+                      }
+                    })
+                  })
+              })
               .catch(() => {
                 alert({
                   heading: 'Oops',
