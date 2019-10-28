@@ -174,6 +174,7 @@ const Portfolio = ({ user, alert, match }) => {
             </Form.Label>
             <Col sm={8}>
               <Form.Control
+                max="999999999"
                 type="number"
                 placeholder="Add Value"
                 name="balance"
@@ -192,6 +193,7 @@ const Portfolio = ({ user, alert, match }) => {
             </Form.Label>
             <Col sm={8}>
               <Form.Control
+                max="999999999"
                 type="number"
                 placeholder="Add Value"
                 name="balance"

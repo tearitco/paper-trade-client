@@ -19,6 +19,7 @@ const PortfolioForm = ({ alert, portfolio, handleChange, handleSubmit }) => {
       <Form.Group controlid="balance">
         <Form.Label>Balance</Form.Label>
         <Form.Control
+          max="999999999"
           type="number"
           placeholder="Your balance"
           name="balance"
