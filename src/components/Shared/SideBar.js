@@ -22,7 +22,7 @@ const SideBar = ({ user, alert, portfolio }) => (
           </Accordion.Collapse>
         </Card>
       </Accordion>
-      <Accordion defaultActiveKey="0">
+      <Accordion className="accordion" defaultActiveKey="0">
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">

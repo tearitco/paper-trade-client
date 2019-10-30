@@ -1,4 +1,15 @@
 $primary: #36dd8c;
 $danger: #fc481c;
+$black: #000;
+$gray: #ddd;
 
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
+* {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.accordion {
+  border-bottom: 1px solid $gray;
+}
