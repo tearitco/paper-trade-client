@@ -54,32 +54,6 @@ const Position = ({ user, alerts, match }) => {
             {position.price}
           </Row>
         </Col>
-        <Button variant="danger"
-          onClick={() => {
-            axios({
-              method: 'DELETE',
-              url: `${apiUrl}/positions/${position.id}`,
-              headers: {
-                'Authorization': `Token token=${user.token}`
-              }
-            })
-              .then(() => {
-                alert({
-                  heading: 'Nice',
-                  message: 'The position is closed',
-                  variant: 'success'
-                })
-              })
-              .catch(() => {
-                alert({
-                  heading: 'Oops',
-                  message: 'Something went wrong',
-                  variant: 'danger'
-                })
-              })
-          }}>
-        Close Position
-        </Button>
       </Row>
     </ListGroup.Item>
   ))
