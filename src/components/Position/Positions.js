@@ -31,14 +31,10 @@ const Positions = ({ user, alert, match, portfolio }) => {
     <ListGroup.Item as="li" key={position.id}>
       <Row>
         <Col sm={6} md={3}>
-          <Row>
-            <p>Company:</p>
-            {position.ticker}
-          </Row>
+          <p>{position.ticker}</p>
         </Col>
         <Col sm={6} md={3}>
           <Row>
-            <p>Position size:</p>
             {position.volume}
           </Row>
         </Col>
@@ -68,7 +64,6 @@ const Positions = ({ user, alert, match, portfolio }) => {
                   }
                 })
                   .then((res) => {
-                    console.log(res)
                     const balance = res.data.portfolio.balance
                     const newBalance = (balance + total)
                     axios({
@@ -94,7 +89,7 @@ const Positions = ({ user, alert, match, portfolio }) => {
                 })
               })
           }}>
-        Close Position
+        Sell
         </Button>
       </Row>
     </ListGroup.Item>
@@ -106,6 +101,16 @@ const Positions = ({ user, alert, match, portfolio }) => {
         <Button>Details</Button>
       </Link>
       <ListGroup as="ul">
+        <ListGroup.Item as="li">
+          <Row>
+            <Col sm={6} md={3}>
+              <p>Ticker</p>
+            </Col>
+            <Col sm={6} md={3}>
+              <p>Size</p>
+            </Col>
+          </Row>
+        </ListGroup.Item>
         {positionsJsx}
       </ListGroup>
     </div>
