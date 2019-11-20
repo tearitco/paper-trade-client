@@ -12,8 +12,8 @@ class SignIn extends Component {
     super()
 
     this.state = {
-      email: '',
-      password: ''
+      email: 'demo@demo',
+      password: 'demo'
     }
   }
 
@@ -53,18 +53,18 @@ class SignIn extends Component {
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
           <h3>Sign In</h3>
           <Form onSubmit={this.onSignIn}>
-            <Form.Group controlId="email">
+            <Form.Group controlId="signInEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 required
                 type="email"
                 name="email"
                 value={email}
-                placeholder="Enter email"
+                placeholder="Email"
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Form.Group controlId="password">
+            <Form.Group controlId="signInPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 required
@@ -74,6 +74,7 @@ class SignIn extends Component {
                 placeholder="Password"
                 onChange={this.handleChange}
               />
+              <small>*Please use the suggested demo credentials for demo</small>
             </Form.Group>
             <Button
               variant="primary"
