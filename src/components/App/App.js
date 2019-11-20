@@ -4,8 +4,6 @@ import { Route } from 'react-router-dom'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
-import SignUp from '../SignUp/SignUp'
-import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import Portfolio from '../Portfolio/Portfolio'
@@ -13,6 +11,7 @@ import PortfolioCreate from '../Portfolio/PortfolioCreate'
 import PortfolioUpdate from '../Portfolio/PortfolioUpdate'
 import Position from '../Position/Position'
 import Layout from '../Shared/Layout'
+import AuthForm from '../AuthForms/AuthForm'
 
 class App extends Component {
   constructor () {
@@ -38,6 +37,7 @@ class App extends Component {
     return (
       <Fragment>
         <Header user={user} />
+
         {alerts.map((alert, index) => (
           <AutoDismissAlert
             key={index}
@@ -47,11 +47,8 @@ class App extends Component {
           />
         ))}
         <main className="container">
-          <Route path='/sign-up' render={() => (
-            <SignUp alert={this.alert} setUser={this.setUser} />
-          )} />
-          <Route path='/sign-in' render={() => (
-            <SignIn alert={this.alert} setUser={this.setUser} />
+          <Route exact path='/' render={() => (
+            <AuthForm alert={this.alert} setUser={this.setUser} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
